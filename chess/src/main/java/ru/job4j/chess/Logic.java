@@ -2,14 +2,22 @@ package ru.job4j.chess;
 
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
+
 import java.util.Arrays;
 
+/**
+ * Управляет логикой игры
+ */
 public final class Logic {
     private final Figure[] figures = new Figure[32];
     private int index = 0;
 
     public void add(Figure figure) {
         figures[index++] = figure;
+    }
+
+    public Figure get(int index) {
+        return figures[index];
     }
 
     public void move(Cell source, Cell dest)
@@ -21,6 +29,16 @@ public final class Logic {
     }
 
     private boolean free(Cell[] steps) throws OccupiedCellException {
+        for (Figure figure : figures) {
+            if (figure == null) {
+                continue;
+            }
+            for (Cell step : steps) {
+                if (step == figure.position()) {
+                    throw new OccupiedCellException();
+                }
+            }
+        }
         return true;
     }
 
