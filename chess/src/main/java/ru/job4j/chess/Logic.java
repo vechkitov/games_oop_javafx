@@ -32,7 +32,7 @@ public final class Logic {
         for (Figure figure : figures) {
             if (figure != null) {
                 for (Cell step : steps) {
-                    if (figure.position().equals(step)) {
+                    if (step.equals(figure.position())) {
                         throw new OccupiedCellException();
                     }
                 }
